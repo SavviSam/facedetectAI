@@ -7,10 +7,10 @@ const Logo = () => {
     <div className="ma4 mt0">
       <Tilt
         className=" Tilt br2 shadow-2"
-        style={{ height: "150px", width: "150px" }}
+        style={{ height: "125px", width: "125px" }}
         glareEnable={true}
       >
-        <div className="pt3">
+        <div style={{ paddingTop: "10px" }}>
           <img className="" src={logo} alt="logo" />
         </div>
       </Tilt>
