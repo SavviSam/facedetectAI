@@ -4,24 +4,7 @@ body {
   font-family: "Montserrat", "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(
-    90deg,
-    #6073d3 20%,
-    #8496eb 35%,
-    #ea8291 80%
-  );
-}
-
-
-
-.font-reg {
-  font-weight: 400;
-}
-.font-md {
-  font-weight: 500;
-}
-.font-bold {
-  font-weight: 700;
+  background: linear-gradient(90deg, #6073d3 20%, #8496eb 35%, #ea8291 80%);
 }
 
 code {
@@ -32,11 +15,4 @@ code {
 button {
   cursor: pointer;
   transition: all 0.4s ease-out;
-}
-
-.hover:hover {
-  transform: scale(1.05);
-  transition: transform 0.4s ease-out;
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 0 5px 15px rgba(145, 159, 226);
 }

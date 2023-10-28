@@ -304,7 +304,7 @@ function ParticlesComponent(props) {
           height: 1080,
         },
         limit: 0,
-        value: 500,
+        value: 1200,
       },
       opacity: {
         random: {
