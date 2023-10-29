@@ -1,6 +1,6 @@
 import "./ImageLinkForm.css";
 
-const ImageLinkForm = ({ input, onInputChange }) => {
+const ImageLinkForm = ({ input, onInputChange, onButtonSubmit }) => {
   return (
     <div className="">
       <p className="f3 font-md white ">
@@ -11,10 +11,12 @@ const ImageLinkForm = ({ input, onInputChange }) => {
           <input
             value={input}
             onChange={onInputChange}
+            onKeyDown={onInputChange}
             className="f4 outline-0 pa2 w-70"
             type="text"
           />
           <button
+            onClick={onButtonSubmit}
             className="w-30 hover f4 white ph3 pv2 dib"
             style={{ backgroundColor: "#111941" }}
           >
