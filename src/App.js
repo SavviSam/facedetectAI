@@ -9,6 +9,7 @@ import { useState } from "react";
 
 function App() {
   const [input, setInput] = useState("");
+  const [image, setImage] = useState("");
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -16,12 +17,12 @@ function App() {
       onButtonSubmit();
     }
   };
+
   const clarifaiRequestOptions = (imageURL) => {
     //Authentication variables for API call
     const PAT = "21c58464ed2247bdb1a794cb96dd64b1";
     const USER_ID = "savvisam";
     const APP_ID = "face-detection";
-
     const IMAGE_URL = imageURL;
 
     const raw = JSON.stringify({
@@ -59,7 +60,11 @@ function App() {
         clarifaiRequestOptions(input)
       );
       const request = await resp.json();
-      console.log("result ", request.status);
+
+      console.log(
+        "result ",
+        request.outputs[0].data.regions[0].region_info.bounding_box
+      );
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -67,6 +72,7 @@ function App() {
 
   const onButtonSubmit = () => {
     fetchRequest();
+    setImage(input);
     setInput("");
   };
 
@@ -84,7 +90,7 @@ function App() {
         onInputChange={onInputChange}
       />
 
-      <FaceRecognition />
+      <FaceRecognition image={image} />
       <Particles />
     </div>
   );
