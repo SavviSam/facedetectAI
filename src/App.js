@@ -10,6 +10,28 @@ import { useState } from "react";
 function App() {
   const [input, setInput] = useState("");
   const [image, setImage] = useState("");
+  const [box, setBox] = useState({});
+
+  const calcFaceLocation = (data) => {
+    const faceDetect = data.outputs[0].data.regions[0].region_info.bounding_box;
+
+    const image = document.getElementById("inputImg");
+    const width = Number(image.width);
+    const height = Number(image.height);
+    console.log(width, height);
+
+    return {
+      leftCol: faceDetect.left_col * width,
+      topRow: faceDetect.top_row * height,
+      rightCol: width - faceDetect.right_col * width,
+      bottomRow: height - faceDetect.bottom_row * height,
+    };
+  };
+
+  const displayBox = (faceBox) => {
+    console.log(faceBox);
+    setBox(faceBox);
+  };
 
   const onInputChange = (e) => {
     setInput(e.target.value);
@@ -20,7 +42,7 @@ function App() {
 
   const clarifaiRequestOptions = (imageURL) => {
     //Authentication variables for API call
-    const PAT = "21c58464ed2247bdb1a794cb96dd64b1";
+    const PAT = "8a2284eadfd942228b7b4ac65360a86e";
     const USER_ID = "savvisam";
     const APP_ID = "face-detection";
     const IMAGE_URL = imageURL;
@@ -61,10 +83,9 @@ function App() {
       );
       const request = await resp.json();
 
-      console.log(
-        "result ",
-        request.outputs[0].data.regions[0].region_info.bounding_box
-      );
+      displayBox(calcFaceLocation(request));
+
+      console.log("result ", request);
     } catch (error) {
       console.log("Error: ", error);
     }
@@ -73,7 +94,7 @@ function App() {
   const onButtonSubmit = () => {
     fetchRequest();
     setImage(input);
-    setInput("");
+    // setInput("");
   };
 
   return (
@@ -89,8 +110,8 @@ function App() {
         input={input}
         onInputChange={onInputChange}
       />
+      <FaceRecognition box={box} image={image} />
 
-      <FaceRecognition image={image} />
       <Particles />
     </div>
   );
